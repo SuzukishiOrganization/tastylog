@@ -69,7 +69,8 @@ resource "aws_security_group_rule" "app_in_tcp3000" {
   protocol                 = "tcp"
   from_port                = 3000
   to_port                  = 3000
-  source_security_group_id = aws_security_group.web_sg.id
+#  source_security_group_id = aws_security_group.web_sg.id
+  cidr_blocks              = ["0.0.0.0/0"]  # ロードバランサーを追加したら元に戻す
 }
 
 # resource "aws_security_group_rule" "app_out_http" {
@@ -97,6 +98,19 @@ resource "aws_security_group_rule" "app_out_tcp3306" {
   from_port                = 3306
   to_port                  = 3306
   source_security_group_id = aws_security_group.db_sg.id
+}
+
+resource "aws_security_group_rule" "app_out_vpc_endpoint" {
+  security_group_id        = aws_security_group.app_sg.id
+  type                     = "egress"
+  protocol                 = "tcp"
+  from_port                = 443
+  to_port                  = 443
+  cidr_blocks              = ["0.0.0.0/0"]
+# 宛先にVPCエンドポイントを作成するサブネットのCIDRを指定しても機能しない。なぜ？
+#  cidr_blocks              = [data.aws_subnet.vpc_endpoint.cidr_block]
+# 宛先にVPCエンドポイントが紐づくセキュリティグループを指定しても機能しない
+#  source_security_group_id = aws_security_group.vpc_endpoint_sg.id
 }
 
 ## opmng security group
@@ -165,5 +179,18 @@ resource "aws_security_group" "db_sg" {
     Name    = "${var.project}-${var.environment}-db-sg"
     Project = var.project
     Env     = var.environment
+  }
+}
+
+# VPCエンドポイント security group
+resource "aws_security_group" "vpc_endpoint_sg" {
+  name        = "${var.project}-${var.environment}-vpc-endpoint-sg"
+  vpc_id      = local.vpc_id
+
+  ingress {
+    protocol        = "-1"
+    from_port       = 0
+    to_port         = 0
+    security_groups = [aws_security_group.app_sg.id]
   }
 }

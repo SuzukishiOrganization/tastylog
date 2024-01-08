@@ -29,7 +29,7 @@ resource "aws_ecs_service" "webapp" {
   # depends_on      = [aws_iam_role.ecs_task_exec_iam_role]
 
   network_configuration {
-    subnets = [local.subnet_ids[0]]
+    subnets = local.subnet_ids
     security_groups = [
       aws_security_group.app_sg.id,
 #      aws_security_group.opmng_sg.id,
