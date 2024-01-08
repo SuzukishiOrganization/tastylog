@@ -13,9 +13,9 @@ resource "aws_vpc_endpoint" "ecr_dkr" {
   service_name      = "com.amazonaws.ap-northeast-1.ecr.dkr"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-  vpc_id            = local.vpc_id
-  subnet_ids        = [local.vpc_endpoint_subnet_id]
+  security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
+  vpc_id              = local.vpc_id
+  subnet_ids          = [local.vpc_endpoint_subnet_id]
   private_dns_enabled = true
 }
 
@@ -26,9 +26,9 @@ resource "aws_vpc_endpoint" "ecr_api" {
   service_name      = "com.amazonaws.ap-northeast-1.ecr.api"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-  vpc_id            = local.vpc_id
-  subnet_ids        = [local.vpc_endpoint_subnet_id]
+  security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
+  vpc_id              = local.vpc_id
+  subnet_ids          = [local.vpc_endpoint_subnet_id]
   private_dns_enabled = true
 }
 
@@ -39,9 +39,9 @@ resource "aws_vpc_endpoint" "logs" {
   service_name      = "com.amazonaws.ap-northeast-1.logs"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-  vpc_id            = local.vpc_id
-  subnet_ids        = [local.vpc_endpoint_subnet_id]
+  security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
+  vpc_id              = local.vpc_id
+  subnet_ids          = [local.vpc_endpoint_subnet_id]
   private_dns_enabled = true
 }
 
@@ -52,8 +52,8 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name      = "com.amazonaws.ap-northeast-1.ssm"
   vpc_endpoint_type = "Interface"
 
-  security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-  vpc_id            = local.vpc_id
-  subnet_ids        = [local.vpc_endpoint_subnet_id]
+  security_group_ids  = [aws_security_group.vpc_endpoint_sg.id]
+  vpc_id              = local.vpc_id
+  subnet_ids          = [local.vpc_endpoint_subnet_id]
   private_dns_enabled = true
 }

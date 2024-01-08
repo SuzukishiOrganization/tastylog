@@ -10,10 +10,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket  = "suzukishi-udemy-tastylog-tfstate-s3"
-    key     = "dev/terraform.tfstate"
-    region  = "ap-northeast-1"
-#    profile = "terraform"
+    bucket = "suzukishi-udemy-tastylog-tfstate-s3"
+    key    = "dev/terraform.tfstate"
+    region = "ap-northeast-1"
+    #    profile = "terraform"
   }
 }
 
@@ -21,8 +21,8 @@ terraform {
 # Provider
 # ---------------------------------------------
 provider "aws" {
-#  profile = "terraform"
-  region  = "ap-northeast-1"
+  #  profile = "terraform"
+  region = "ap-northeast-1"
 }
 
 #provider "aws" {

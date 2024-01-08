@@ -32,22 +32,22 @@ resource "aws_ecs_service" "webapp" {
     subnets = local.subnet_ids
     security_groups = [
       aws_security_group.app_sg.id,
-#      aws_security_group.opmng_sg.id,
+      #      aws_security_group.opmng_sg.id,
     ]
     assign_public_ip = false
   }
 
   # Only valid for services configured to use load balancers.
-#  health_check_grace_period_seconds = 300
+  #  health_check_grace_period_seconds = 300
 
-#  load_balancer {
-#    target_group_arn = aws_lb_target_group.webapp_blue.arn
-#    container_name   = "webapp"
-#    container_port   = 3000
-#  }
+  #  load_balancer {
+  #    target_group_arn = aws_lb_target_group.webapp_blue.arn
+  #    container_name   = "webapp"
+  #    container_port   = 3000
+  #  }
 
   lifecycle {
-#    ignore_changes = [desired_count, task_definition, load_balancer]
+    #    ignore_changes = [desired_count, task_definition, load_balancer]
     ignore_changes = [desired_count, task_definition]
   }
 }

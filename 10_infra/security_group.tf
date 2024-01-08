@@ -55,22 +55,22 @@ resource "aws_security_group" "app_sg" {
 }
 
 resource "aws_security_group_rule" "app_in_http" {
-  security_group_id        = aws_security_group.app_sg.id
-  type                     = "ingress"
-  protocol                 = "tcp"
-  from_port                = 80
-  to_port                  = 80
-  cidr_blocks              = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.app_sg.id
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 80
+  to_port           = 80
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "app_in_tcp3000" {
-  security_group_id        = aws_security_group.app_sg.id
-  type                     = "ingress"
-  protocol                 = "tcp"
-  from_port                = 3000
-  to_port                  = 3000
-#  source_security_group_id = aws_security_group.web_sg.id
-  cidr_blocks              = ["0.0.0.0/0"]  # ロードバランサーを追加したら元に戻す
+  security_group_id = aws_security_group.app_sg.id
+  type              = "ingress"
+  protocol          = "tcp"
+  from_port         = 3000
+  to_port           = 3000
+  #  source_security_group_id = aws_security_group.web_sg.id
+  cidr_blocks = ["0.0.0.0/0"] # ロードバランサーを追加したら元に戻す
 }
 
 # resource "aws_security_group_rule" "app_out_http" {
@@ -101,16 +101,16 @@ resource "aws_security_group_rule" "app_out_tcp3306" {
 }
 
 resource "aws_security_group_rule" "app_out_vpc_endpoint" {
-  security_group_id        = aws_security_group.app_sg.id
-  type                     = "egress"
-  protocol                 = "tcp"
-  from_port                = 443
-  to_port                  = 443
-  cidr_blocks              = ["0.0.0.0/0"]
-# 宛先にVPCエンドポイントを作成するサブネットのCIDRを指定しても機能しない。なぜ？
-#  cidr_blocks              = [data.aws_subnet.vpc_endpoint.cidr_block]
-# 宛先にVPCエンドポイントが紐づくセキュリティグループを指定しても機能しない
-#  source_security_group_id = aws_security_group.vpc_endpoint_sg.id
+  security_group_id = aws_security_group.app_sg.id
+  type              = "egress"
+  protocol          = "tcp"
+  from_port         = 443
+  to_port           = 443
+  cidr_blocks       = ["0.0.0.0/0"]
+  # 宛先にVPCエンドポイントを作成するサブネットのCIDRを指定しても機能しない。なぜ？
+  #  cidr_blocks              = [data.aws_subnet.vpc_endpoint.cidr_block]
+  # 宛先にVPCエンドポイントが紐づくセキュリティグループを指定しても機能しない
+  #  source_security_group_id = aws_security_group.vpc_endpoint_sg.id
 }
 
 ## opmng security group
@@ -184,8 +184,8 @@ resource "aws_security_group" "db_sg" {
 
 # VPCエンドポイント security group
 resource "aws_security_group" "vpc_endpoint_sg" {
-  name        = "${var.project}-${var.environment}-vpc-endpoint-sg"
-  vpc_id      = local.vpc_id
+  name   = "${var.project}-${var.environment}-vpc-endpoint-sg"
+  vpc_id = local.vpc_id
 
   ingress {
     protocol        = "-1"

@@ -31,7 +31,7 @@ resource "aws_db_option_group" "mysql_standalone_optiongroup" {
 # RDS subnet group
 # ---------------------------------------------
 resource "aws_db_subnet_group" "mysql_standalone_subnetgroup" {
-  name = "${var.project}-${var.environment}-mysql-standalone-subnetgroup"
+  name       = "${var.project}-${var.environment}-mysql-standalone-subnetgroup"
   subnet_ids = local.subnet_ids
 
   tags = {
@@ -66,8 +66,8 @@ resource "aws_db_instance" "mysql_standalone" {
   db_subnet_group_name   = aws_db_subnet_group.mysql_standalone_subnetgroup.name
   publicly_accessible    = false
   vpc_security_group_ids = [aws_security_group.db_sg.id]
-#  availability_zone      = "ap-northeast-1a"
-  port                   = 3306
+  #  availability_zone      = "ap-northeast-1a"
+  port = 3306
 
   name                       = "tastylog"
   parameter_group_name       = aws_db_parameter_group.mysql_standalone_parametergroup.name
