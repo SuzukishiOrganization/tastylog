@@ -144,7 +144,7 @@ jobs:
             					"type": "header",
             					"text": {
             						"type": "plain_text",
-            						"text": "デプロイジョブ終了：結果コード=${{ steps.apply.outcome }}",
+            						"text": "デプロイジョブ終了：結果コード= ${{ steps.apply.outcome }}",
             						"emoji": true
             					}
             				},
