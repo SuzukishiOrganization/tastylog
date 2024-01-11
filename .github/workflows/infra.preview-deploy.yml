@@ -66,7 +66,8 @@ jobs:
       - name: Slack notify
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          channel-id: 'C06D72CRCG6'
+          if: steps.plan.outputs.exitcode == 2
+          channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
           payload: |
             {
             	"attachments": [
