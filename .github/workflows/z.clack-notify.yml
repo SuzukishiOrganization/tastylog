@@ -1,0 +1,41 @@
+name: "z Slack Notify"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  notify:
+    name: Slack notify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          channel-id: 'C06D72CRCG6'
+          payload: |
+            {
+            	"attachments": [
+            		{
+            			"blocks": [
+            				{
+            					"type": "header",
+            					"text": {
+            						"type": "plain_text",
+            						"text": "メッセージのヘッダー",
+            						"emoji": true
+            					}
+            				},
+            				{
+            					"type": "section",
+            					"text": {
+            						"type": "mrkdwn",
+            						"text": "This is a mrkdwn section block :ghost: *this is bold*, and ~this is crossed out~, and <https://google.co.jp|this is a link>"
+            					}
+            				}
+            			]
+            		}
+            	]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
