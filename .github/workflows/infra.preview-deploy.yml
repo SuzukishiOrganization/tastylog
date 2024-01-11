@@ -65,8 +65,8 @@ jobs:
             -detailed-exitcode
       - name: Slack notify
         uses: slackapi/slack-github-action@v1.24.0
+        if: steps.plan.outputs.exitcode == 2
         with:
-          if: steps.plan.outputs.exitcode == 2
           channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
           payload: |
             {
